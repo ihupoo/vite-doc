@@ -1,0 +1,38 @@
+import styled from 'styled-components'
+
+export const Wrap = styled.div`
+	position: fixed;
+	z-index: 101;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 58px;
+	height: 64px;
+	white-space: nowrap;
+	background: #fff;
+	box-shadow: 0 8px 24px -2px rgb(0 0 0 / 5%);
+
+	.toggle {
+		position: absolute;
+		top: 14px;
+		left: 16px;
+		display: none;
+		width: 22px;
+		height: 22px;
+		border: 0;
+		outline: none;
+		background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAA4CAYAAAB5YT9uAAAAAXNSR0IArs4c6QAAASVJREFUeAHt3DuOwjAUBVAHscWZjaSkAIqU2QjskV80QwpsF3ArdGiw3hW3OGnQM2Iof6/dfr7+n71/LjAdx+HRsvm8SkNPAHBPJ5ABDiD2KgD3dAIZ4ABirwJwTyeQAQ4g9ioA93QC2fbZsSm/z7MDAQIECBAgQIAAAQIECBAgQIAAAQKvAsvV8mO8O8yn19jkXYHpMC7byXVdeS0/75b5XFvAwr1tE0kARxjbJYDbNpEEcISxXQK4bRNJAEcY2yWA2zaRZP0ePJRzpFEJAQIECBAgQIAAAQIECBAgQIAAgW8VWK/tj7Nb5eBTnvbjsp1c15WX4ncRQeB7lb8zyHrW29xo1F1iU8AxynoR4LpLbAo4RlkvAlx3iU0BxyjrRYDrLrHpDVSAEEPXScHTAAAAAElFTkSuQmCC')
+			no-repeat center / contain;
+
+		@media (max-width: 767px) {
+			display: block;
+		}
+	}
+
+	> a {
+		color: #080e29;
+	}
+`
