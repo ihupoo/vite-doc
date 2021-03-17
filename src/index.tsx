@@ -4,8 +4,8 @@ import './index.css'
 import Layout from './theme'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Layout />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Layout />
+	</React.StrictMode>,
+	document.getElementById('root')
 )

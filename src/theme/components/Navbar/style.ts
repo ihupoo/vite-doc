@@ -15,6 +15,12 @@ export const Wrap = styled.div`
 	background: #fff;
 	box-shadow: 0 8px 24px -2px rgb(0 0 0 / 5%);
 
+	@media (max-width: 767px) {
+		display: flex;
+		justify-content: center;
+		height: 50px;
+	}
+
 	.toggle {
 		position: absolute;
 		top: 14px;
@@ -34,5 +40,61 @@ export const Wrap = styled.div`
 
 	> a {
 		color: #080e29;
+	}
+
+	nav {
+		> span {
+			position: relative;
+			margin-left: 40px;
+			display: inline-block;
+			color: #454d64;
+			height: 64px;
+			cursor: pointer;
+			font-size: 14px;
+			line-height: 64px;
+			text-decoration: none;
+			letter-spacing: 0;
+
+			> a {
+				color: #4d5164;
+
+				&:hover,
+				&.active {
+					color: #4569d4;
+				}
+
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					right: -18px;
+					left: -18px;
+				}
+
+				&.active::after {
+					content: '';
+					position: absolute;
+					bottom: 0;
+					left: -2px;
+					right: -2px;
+					height: 2px;
+					background-color: #4569d4;
+					border-radius: 1px;
+				}
+			}
+
+			+ *:not(a) {
+				margin-left: 40px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			> a,
+			> span,
+			> div {
+				display: none;
+			}
+		}
 	}
 `
