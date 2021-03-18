@@ -2,7 +2,7 @@ import type { Node } from 'unist'
 import visit from 'unist-util-visit'
 import type { IElmNode, IUnifiedTransformer } from '.'
 
-export default function isolation(options: Record<string, any> = {}): IUnifiedTransformer {
+export default function isolation(): IUnifiedTransformer {
 	return (ast: Node) => {
 		visit<IElmNode>(ast, 'root', (node) => {
 			if (node.children) {
@@ -12,7 +12,7 @@ export default function isolation(options: Record<string, any> = {}): IUnifiedTr
 						result.push({
 							type: 'element',
 							tagName: 'div',
-							properties: { className: options.className || 'markdown' },
+							properties: { className: 'markdown' },
 							children: [],
 						})
 					}
