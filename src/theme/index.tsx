@@ -21,7 +21,7 @@ export default function Layout() {
 						ev.stopPropagation()
 					}}
 				/>
-				<SideMenu />
+				<SideMenu mobileMenuCollapsed={menuCollapsed} />
 			</Wrap>
 		</Router>
 	)

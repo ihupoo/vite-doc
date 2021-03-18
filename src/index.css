@@ -23,3 +23,22 @@ a, a:focus {
     text-decoration: none;
 	outline: 0;
 }
+
+:root{
+	/* 颜色表 */
+	--doc-primary: #4569d4;
+	--doc-heading: #454d64;
+	--doc-text: #454d64;
+	--doc-secondary: #717484;
+	--doc-link: #4569d4;
+	--doc-border: #ebedf1;
+	--doc-light-bg: #f9fafb;
+
+	/* 尺寸表 */
+	--doc-nav-height: 64px;
+	--doc-mobile-nav-height: 50px;
+	--doc-menu-width: 260px;
+	--doc-site-menu-width: 300px;
+	--doc-menu-mobile-width: 240px;
+	--doc-content-margin: 58px;
+}

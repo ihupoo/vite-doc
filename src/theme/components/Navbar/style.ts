@@ -10,7 +10,7 @@ export const Wrap = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 58px;
-	height: 64px;
+	height: var(--doc-nav-height);
 	white-space: nowrap;
 	background: #fff;
 	box-shadow: 0 8px 24px -2px rgb(0 0 0 / 5%);
@@ -18,7 +18,7 @@ export const Wrap = styled.div`
 	@media (max-width: 767px) {
 		display: flex;
 		justify-content: center;
-		height: 50px;
+		height: var(--doc-mobile-nav-height);
 	}
 
 	.toggle {
@@ -47,11 +47,11 @@ export const Wrap = styled.div`
 			position: relative;
 			margin-left: 40px;
 			display: inline-block;
-			color: #454d64;
-			height: 64px;
+			color: var(--doc-text);
+			height: var(--doc-nav-height);
 			cursor: pointer;
 			font-size: 14px;
-			line-height: 64px;
+			line-height: var(--doc-nav-height);
 			text-decoration: none;
 			letter-spacing: 0;
 
@@ -60,7 +60,7 @@ export const Wrap = styled.div`
 
 				&:hover,
 				&.active {
-					color: #4569d4;
+					color: var(--doc-primary);
 				}
 
 				&::before {
@@ -79,7 +79,7 @@ export const Wrap = styled.div`
 					left: -2px;
 					right: -2px;
 					height: 2px;
-					background-color: #4569d4;
+					background-color: var(--doc-primary);
 					border-radius: 1px;
 				}
 			}

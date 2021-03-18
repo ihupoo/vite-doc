@@ -1,4 +1,4 @@
-import { IMenu, IMenuItem, INav, INavItem, IRoute } from '@/route'
+import { IMenu, IMenuItem, INav, INavItem, IRoute, ISlugItem } from '@/route'
 import React from 'react'
 
 export interface IContext {
@@ -21,7 +21,12 @@ export interface IContext {
 	menu: IMenuItem[]
 	nav: INavItem[]
 	base: string
-	routes: (IRoute & { meta: any })[]
+	routes: (IRoute & {
+		meta: {
+			slugs?: ISlugItem[]
+			[key: string]: any
+		}
+	})[]
 }
 
 const context = React.createContext<IContext>({

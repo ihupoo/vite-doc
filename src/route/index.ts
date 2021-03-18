@@ -1,15 +1,14 @@
 export interface INavItem {
 	title: string
 	path?: string
-	children: INavItem[]
 	[key: string]: any
 }
 
 export type INav = Record<string, INavItem[]>
 
 export interface IMenuItem {
-	path?: string
 	title: string
+	path: string
 	meta?: Record<string, any>
 	children?: IMenuItem[]
 }
@@ -21,10 +20,16 @@ export type IMenu = Record<
 	}
 >
 
+export interface ISlugItem {
+	heading: string
+	value: string
+	depth: number
+}
+
 export interface IRoute {
+	path: string
 	component?: string
 	exact?: boolean
-	path?: string
 	routes?: IRoute[]
 	title?: string
 	[key: string]: any

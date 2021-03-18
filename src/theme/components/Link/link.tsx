@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link as RouterLink, LinkProps } from 'react-router-dom'
+import { NavLink, NavLinkProps } from 'react-router-dom'
 
-export function Link(props: LinkProps) {
+export function Link(props: NavLinkProps) {
 	const { to, ...res } = props
 	return (
-		<Link
+		<NavLink
 			to={props.to}
 			{...res}
 			onClick={(e) => {

@@ -1,19 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { AnchorLink } from '../Link'
+import useSearch from './hooks'
 import { Wrap } from './style'
 
 export default function SearchBar() {
 	const [keywords, setKeywords] = useState<string>('')
-	const [items, setItems] = useState([])
-	const input = useRef<HTMLInputElement>()
+	const input = useRef<HTMLInputElement>(null)
 	const result = useSearch(keywords)
-
-	useEffect(() => {
-		if (Array.isArray(result)) {
-			setItems(result)
-		} else if (typeof result === 'function') {
-			result(`.${input.current.className}`)
-		}
-	}, [result])
 
 	return (
 		<Wrap>
@@ -23,7 +16,7 @@ export default function SearchBar() {
 				{...(Array.isArray(result) ? { value: keywords, onChange: (ev) => setKeywords(ev.target.value) } : {})}
 			/>
 			<ul>
-				{items.map((meta) => (
+				{result.map((meta) => (
 					<li key={meta.path} onClick={() => setKeywords('')}>
 						<AnchorLink to={meta.path}>
 							{meta.parent?.title && <span>{meta.parent.title}</span>}
