@@ -1,5 +1,36 @@
 import fs from 'fs'
 
+/* 监听文件变化 */
+export interface IWatcherItem {
+	listeners?: ((event: string, filename: string) => void)[]
+	watcher: fs.FSWatcher
+}
+
+const isDev = () => process.env.NODE_ENV === 'development' || process.env.TEST_WATCHER
+const watchers: Record<string, IWatcherItem | null> = {}
+
+export const closeFileWatcher = (filePath: string) => {
+	// close & remove listeners
+	watchers[filePath]?.watcher.close()
+	watchers[filePath] = null
+}
+
+export const listenFileOnceChange = (filePath: string, listener: (event: string, filename: string) => void) => {
+	if (isDev()) {
+		watchers[filePath] = watchers[filePath] || {
+			listeners: [],
+			watcher: fs.watch(filePath, (...args) => {
+				const listeners = watchers[filePath]?.listeners
+				// close watcher if change triggered
+				closeFileWatcher(filePath)
+				listeners?.forEach((fn) => fn(...args))
+			}),
+		}
+		watchers[filePath]?.listeners?.push(listener)
+	}
+}
+
+/* 文件缓存 */
 export default class FileCache {
 	cache: Record<string, { filePath: string; updatedTime: number; value: any }> = {}
 
@@ -22,6 +53,7 @@ export default class FileCache {
 	}
 }
 
+/* 获取参数 */
 const ATTR_MAPPING = {
 	hideactions: 'hideActions',
 	defaultshowcode: 'defaultShowCode',

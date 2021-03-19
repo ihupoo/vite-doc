@@ -4,10 +4,9 @@ import deepmerge from 'deepmerge'
 import is from 'hast-util-is-element'
 import has from 'hast-util-has-property'
 import visit from 'unist-util-visit'
-import { parseElmAttrToProps } from './utils'
+import { parseElmAttrToProps } from '../utils'
 import parser from './parser'
-import { getModuleResolvePath } from '../../utils/moduleResolver'
-import { listenFileOnceChange } from '../../utils/watcher'
+import { listenFileOnceChange } from '../utils'
 import type { IUnifiedTransformer, IElmNode } from '../index'
 
 /**
@@ -115,37 +114,19 @@ export default function api(this: any): IUnifiedTransformer {
 	return (ast, vFile) => {
 		visit<IElmNode>(ast, 'element', (node, i, parent) => {
 			if (is(node, 'API') && !node._parsed) {
-				let identifier: string
-				let definitions: ReturnType<typeof parser>
+				let identifier: string = ''
+				let definitions: ReturnType<typeof parser> | null = null
 
-				if (has(node, 'src')) {
-					const src = node.properties.src || ''
-					// guess component name if there has no identifier property
-					const componentName = node.properties.identifier || guessComponentName(src)
-					const absPath = path.join(path.dirname(this.data('fileAbsPath')), src)
+				const src = node.properties.src || ''
+				// guess component name if there has no identifier property
+				const componentName = node.properties.identifier || guessComponentName(src)
+				const absPath = path.join(path.dirname(this.data('fileAbsPath')), src)
 
-					definitions = parser(absPath, componentName)
-					identifier = componentName || src
+				definitions = parser(absPath, componentName)
+				identifier = componentName || src
 
-					// trigger listener to update previewer props after this file changed
-					watchComponentUpdate(absPath, componentName, identifier)
-				} else if (vFile.data.componentName) {
-					try {
-						const sourcePath = getModuleResolvePath({
-							basePath: process.cwd(),
-							sourcePath: path.dirname(this.data('fileAbsPath')),
-							silent: true,
-						})
-
-						definitions = parser(sourcePath, vFile.data.componentName)
-						identifier = vFile.data.componentName
-
-						// trigger listener to update previewer props after this file changed
-						watchComponentUpdate(sourcePath, vFile.data.componentName, identifier)
-					} catch (err) {
-						/* noting */
-					}
-				}
+				// trigger listener to update previewer props after this file changed
+				watchComponentUpdate(absPath, componentName, identifier)
 
 				if (identifier && definitions) {
 					// replace original node

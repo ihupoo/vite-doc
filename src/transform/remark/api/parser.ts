@@ -38,7 +38,7 @@ interface ApiProp {
 	/**
 	 * property whether required
 	 */
-	required?: true
+	required?: boolean
 
 	// [key: string]: any
 }
@@ -92,10 +92,16 @@ export default function Parser(filePath: string, componentName?: string) {
 								}
 								break
 
-							default:
+							case 'required':
 								if (prop[field]) {
-									result[field] = prop[field]
+									result.required = prop[field]
 								}
+								break
+
+							default:
+							// if (prop[field]) {
+							// 	result[field] = prop[field]
+							// }
 						}
 					})
 
